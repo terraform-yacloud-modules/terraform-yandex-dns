@@ -9,9 +9,15 @@ variable "name" {
 #
 # DNS record
 #
-variable "zone_id" {
-  description = "The id of the zone in which this record set will reside."
+variable "zone_name" {
+  description = "The name of the zone in which this record set will reside; Skipped if zone_id is set"
   type        = string
+  default     = null
+}
+variable "zone_id" {
+  description = "The id of the zone in which this record set will reside"
+  type        = string
+  default     = null
 }
 
 variable "type" {
