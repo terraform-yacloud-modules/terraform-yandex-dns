@@ -20,6 +20,12 @@ variable "zone_id" {
   default     = null
 }
 
+variable "folder_id" {
+  description = "Folder ID in which this record will be created"
+  type        = string
+  default     = null
+}
+
 variable "type" {
   description = "The DNS record set type"
   type        = string
