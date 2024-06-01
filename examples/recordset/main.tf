@@ -2,7 +2,7 @@ module "dns-recordset" {
   source = "../../modules/recordset/"
 
   folder_id = "xxxx"
-  zone_id   = "dns5g36rppi1903vq05p"
+  zone_id   = "xxxx"
   name      = "test.example.com."
   type      = "A"
   ttl       = 200
