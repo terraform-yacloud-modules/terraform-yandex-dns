@@ -1,8 +1,8 @@
 module "dns-zone" {
-#   source = "../../modules/zone/"
+  #   source = "../../modules/zone/"
   source = "git::https://github.com/terraform-yacloud-modules/terraform-yandex-dns.git//modules/zone"
 
-  folder_id = "xxxx"
+  folder_id   = "xxxx"
   name        = "my-private-zone"
   description = "desc"
 

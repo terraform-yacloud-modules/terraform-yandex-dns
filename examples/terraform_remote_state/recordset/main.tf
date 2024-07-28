@@ -7,7 +7,7 @@ data "terraform_remote_state" "zone" {
 }
 
 module "dns-recordset" {
-#   source = "../../modules/recordset/"
+  #   source = "../../modules/recordset/"
   source = "git::https://github.com/terraform-yacloud-modules/terraform-yandex-dns.git//modules/recordset"
 
   folder_id = "xxxx"
