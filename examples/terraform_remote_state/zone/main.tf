@@ -1,8 +1,28 @@
-module "dns-zone" {
-  #   source = "../../modules/zone/"
-  source = "git::https://github.com/terraform-yacloud-modules/terraform-yandex-dns.git//modules/zone"
+data "yandex_client_config" "client" {}
 
-  folder_id   = "xxxx"
+module "network" {
+  source = "git::https://github.com/terraform-yacloud-modules/terraform-yandex-vpc.git?ref=v1.0.0"
+
+  folder_id = data.yandex_client_config.client.folder_id
+
+  blank_name = "vpc-nat-gateway"
+  labels = {
+    repo = "terraform-yacloud-modules/terraform-yandex-vpc"
+  }
+
+  azs = ["ru-central1-a"]
+
+  private_subnets = [["10.10.10.0/24"]]
+
+  create_vpc         = true
+  create_nat_gateway = true
+}
+
+module "dns_zone" {
+  #   source = "../../modules/zone/"
+  source = "git::https://github.com/terraform-yacloud-modules/terraform-yandex-dns.git//modules/zone?ref=v1.0.0"
+
+  folder_id   = data.yandex_client_config.client.folder_id
   name        = "my-private-zone"
   description = "desc"
 
@@ -12,9 +32,5 @@ module "dns-zone" {
 
   zone             = "example.com."
   is_public        = false
-  private_networks = ["xxxx"]
-}
-
-output "zone_id" {
-  value = module.dns-zone.id
+  private_networks = [module.network.vpc_id] # network_id
 }
