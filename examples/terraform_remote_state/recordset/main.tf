@@ -6,11 +6,13 @@ data "terraform_remote_state" "zone" {
   }
 }
 
-module "dns-recordset" {
-  #   source = "../../modules/recordset/"
-  source = "git::https://github.com/terraform-yacloud-modules/terraform-yandex-dns.git//modules/recordset"
+data "yandex_client_config" "client" {}
 
-  folder_id = "xxxx"
+module "dns_recordset" {
+  #   source = "../../modules/recordset/"
+  source = "git::https://github.com/terraform-yacloud-modules/terraform-yandex-dns.git//modules/recordset?ref=v1.0.0"
+
+  folder_id = data.yandex_client_config.client.folder_id
   zone_id   = data.terraform_remote_state.zone.outputs.zone_id
   name      = "test.example.com."
   type      = "A"
