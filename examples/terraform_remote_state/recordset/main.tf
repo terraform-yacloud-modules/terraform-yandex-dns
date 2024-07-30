@@ -6,8 +6,6 @@ data "terraform_remote_state" "zone" {
   }
 }
 
-data "yandex_client_config" "client" {}
-
 module "dns_recordset" {
   #   source = "../../modules/recordset/"
   source = "git::https://github.com/terraform-yacloud-modules/terraform-yandex-dns.git//modules/recordset?ref=v1.0.0"
