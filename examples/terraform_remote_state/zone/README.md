@@ -1,4 +1,4 @@
-# Yandex Cloud DNS Terraform module
+# DNS Zone example
 
 Terraform module which creates Yandex Cloud DNS resources.
 
