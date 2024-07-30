@@ -3,8 +3,6 @@ data "yandex_client_config" "client" {}
 module "network" {
   source = "git::https://github.com/terraform-yacloud-modules/terraform-yandex-vpc.git?ref=v1.0.0"
 
-  folder_id = data.yandex_client_config.client.folder_id
-
   blank_name = "vpc-nat-gateway"
   labels = {
     repo = "terraform-yacloud-modules/terraform-yandex-vpc"
@@ -22,7 +20,6 @@ module "dns_zone" {
   #   source = "../../modules/zone/"
   source = "git::https://github.com/terraform-yacloud-modules/terraform-yandex-dns.git//modules/zone?ref=v1.0.0"
 
-  folder_id   = data.yandex_client_config.client.folder_id
   name        = "my-private-zone"
   description = "desc"
 
