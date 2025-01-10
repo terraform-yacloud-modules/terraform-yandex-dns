@@ -2,6 +2,38 @@
 
 Manage DNS zones.
 
+Example of usage in Terragrunt `terragrunt.hcl`:
+```hcl
+include "root" {
+  path = find_in_parent_folders("root.hcl")
+}
+
+include "env" {
+  path = find_in_parent_folders("environment.hcl")
+}
+
+locals {
+  env_vars  = read_terragrunt_config(find_in_parent_folders("environment.hcl"))
+  dns_zones = local.env_vars.locals.dns_zones
+}
+
+terraform {
+  source = "git::https://github.com/terraform-yacloud-modules/terraform-yandex-dns.git//modules/zones?ref=zones"
+}
+
+inputs = {
+  zones = { for zone in local.dns_zones : zone => {
+    }
+  }
+}
+```
+with `environment.hcl`:
+```hcl
+locals {
+  dns_zones = [ "example.com", "example.org" ]
+}
+```
+
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
