@@ -22,7 +22,10 @@ terraform {
 }
 
 inputs = {
-  zones = { for zone in local.dns_zones : zone => {
+  zones = {
+    for zone in local.dns_zones : zone => {
+      name = replace(zone, ".", "-")
+      public = true
     }
   }
 }
