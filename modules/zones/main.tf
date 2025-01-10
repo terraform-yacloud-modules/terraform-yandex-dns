@@ -1,7 +1,7 @@
 resource "yandex_dns_zone" "this" {
   for_each = { for k, v in var.zones : k => v if var.create }
 
-  name        = lookup(each.value, "name", chomp(each.key, "."))
+  name        = lookup(each.value, "name", regex_replace(each.key, "\\.$", ""))
   description = lookup(each.value, "description", "DNS zone for ${each.key}")
 
   zone = lookup(each.value, "zone", each.key)
