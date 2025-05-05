@@ -1,12 +1,4 @@
 #
-# naming
-#
-variable "name" {
-  description = "The DNS name this record set will apply to"
-  type        = string
-}
-
-#
 # DNS record
 #
 variable "zone_name" {
@@ -24,23 +16,6 @@ variable "zone_id" {
 variable "folder_id" {
   description = "Folder ID in which this record will be created"
   type        = string
-  default     = null
-}
-
-variable "type" {
-  description = "The DNS record set type"
-  type        = string
-}
-
-variable "ttl" {
-  description = "The time-to-live of this record set (seconds)"
-  type        = string
-  default     = null
-}
-
-variable "data" {
-  description = "The string data for the records in this record set"
-  type        = list(string)
   default     = null
 }
 
