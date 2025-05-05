@@ -10,7 +10,7 @@ locals {
 resource "yandex_dns_recordset" "this" {
   for_each = { for k, v in local.recordsets : k => v if(var.zone_id != null || var.zone_name != null) }
 
-  zone_id = var.zone_name != null ? data.yandex_dns_zone.main[0].id : var.zone_id
+  zone_id = var.zone_name != null ? data.yandex_dns_zone.this.id : var.zone_id
 
   name = lookup(each.value, "name", "")
   type = lookup(each.value, "type", "A")
