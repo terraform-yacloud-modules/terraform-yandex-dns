@@ -12,7 +12,7 @@ resource "yandex_dns_recordset" "this" {
 
   zone_id = var.zone_name != null ? data.yandex_dns_zone.main[0].id : var.zone_id
 
-  name = each.value.name
+  name = lookup(each.value, "name", " ")
   type = lookup(each.value, "type", "A")
   ttl  = lookup(each.value, "ttl", 300)
   data = lookup(each.value, "data", null)
