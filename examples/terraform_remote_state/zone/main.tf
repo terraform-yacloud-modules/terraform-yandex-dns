@@ -15,8 +15,8 @@ module "network" {
 }
 
 module "dns_zone" {
-  #   source = "../../modules/zone/"
-  source = "git::https://github.com/terraform-yacloud-modules/terraform-yandex-dns.git//modules/zone?ref=v1.0.0"
+  source = "../../../modules/zone/"
+  # source = "git::https://github.com/terraform-yacloud-modules/terraform-yandex-dns.git//modules/zone?ref=v1.0.0"
 
   name        = "my-private-zone"
   description = "desc"

@@ -7,8 +7,8 @@ data "terraform_remote_state" "zone" {
 }
 
 module "dns_recordset" {
-  #   source = "../../modules/recordset/"
-  source = "git::https://github.com/terraform-yacloud-modules/terraform-yandex-dns.git//modules/recordset?ref=v1.0.0"
+  source = "../../../modules/recordset/"
+  # source = "git::https://github.com/terraform-yacloud-modules/terraform-yandex-dns.git//modules/recordset?ref=v1.0.0"
 
   zone_id = data.terraform_remote_state.zone.outputs.zone_id
   name    = "test.example.com."
