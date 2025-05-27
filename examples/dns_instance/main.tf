@@ -42,8 +42,8 @@ module "yandex_compute_instance" {
 }
 
 module "dns_zone" {
-
-  source = "git::https://github.com/terraform-yacloud-modules/terraform-yandex-dns.git//modules/zone?ref=v1.0.0"
+  source = "../../modules/zone/"
+  # source = "git::https://github.com/terraform-yacloud-modules/terraform-yandex-dns.git//modules/zone?ref=v1.0.0"
 
   name        = "my-private-zone"
   description = "desc"
@@ -54,7 +54,8 @@ module "dns_zone" {
 }
 
 module "dns_recordset" {
-  source = "git::https://github.com/terraform-yacloud-modules/terraform-yandex-dns.git//modules/recordset?ref=v1.0.0"
+  source = "../../modules/recordset/"
+  # source = "git::https://github.com/terraform-yacloud-modules/terraform-yandex-dns.git//modules/recordset?ref=v1.0.0"
 
   zone_id = module.dns_zone.id
   name    = "test.apatsev.org.ru."
