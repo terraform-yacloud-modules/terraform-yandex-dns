@@ -4,7 +4,7 @@ output "id" {
 }
 
 output "name" {
-  description = "User assigned name of the DNS zone"
+  description = "The user-assigned name of the DNS zone as specified in the configuration."
   value       = yandex_dns_zone.main.name
 }
 
@@ -14,7 +14,7 @@ output "description" {
 }
 
 output "zone" {
-  description = "The DNS name of this zone"
+  description = "The DNS name of the zone (e.g., 'example.com.') representing the domain namespace managed by this zone."
   value       = yandex_dns_zone.main.zone
 }
 
@@ -24,7 +24,7 @@ output "folder_id" {
 }
 
 output "public" {
-  description = "The zone's visibility: public zones are exposed to the Internet"
+  description = "Indicates whether the DNS zone is public (accessible from the Internet) or private (restricted to specified VPC networks)."
   value       = yandex_dns_zone.main.public
 }
 
