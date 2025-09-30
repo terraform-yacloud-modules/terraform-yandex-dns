@@ -37,4 +37,3 @@ output "zone_domain" {
   description = "The domain name of the DNS zone (e.g., 'example.com.'). Only available if zone_name was provided in the configuration."
   value       = var.zone_name != null ? data.yandex_dns_zone.main[0].zone : null
 }
-
