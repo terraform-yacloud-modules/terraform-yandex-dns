@@ -3,7 +3,7 @@
 Manage IAM account.
 
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -52,4 +52,4 @@ No modules.
 | <a name="output_private_networks"></a> [private\_networks](#output\_private\_networks) | The set of Virtual Private Cloud resources that the zone is visible from |
 | <a name="output_public"></a> [public](#output\_public) | Indicates whether the DNS zone is public (accessible from the Internet) or private (restricted to specified VPC networks). |
 | <a name="output_zone"></a> [zone](#output\_zone) | The DNS name of the zone (e.g., 'example.com.') representing the domain namespace managed by this zone. |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->

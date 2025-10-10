@@ -3,7 +3,7 @@
 Manage IAM account.
 
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -52,4 +52,4 @@ No modules.
 | <a name="output_zone_domain"></a> [zone\_domain](#output\_zone\_domain) | The domain name of the DNS zone (e.g., 'example.com.'). Only available if zone\_name was provided in the configuration. |
 | <a name="output_zone_id"></a> [zone\_id](#output\_zone\_id) | The ID of the DNS zone where this record set is located. |
 | <a name="output_zone_name"></a> [zone\_name](#output\_zone\_name) | The name of the DNS zone where the record set is located. Only available if zone\_name was provided in the configuration. |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->
