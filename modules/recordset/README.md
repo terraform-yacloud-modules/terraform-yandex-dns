@@ -35,6 +35,7 @@ No modules.
 | <a name="input_data"></a> [data](#input\_data) | The list of data values for the DNS records in this record set. Format depends on the record type (e.g., IP addresses for A records, domain names for CNAME records). | `list(string)` | `null` | no |
 | <a name="input_folder_id"></a> [folder\_id](#input\_folder\_id) | The ID of the Yandex Cloud folder where the DNS record will be created. If omitted, the default folder ID from the provider configuration will be used. | `string` | `null` | no |
 | <a name="input_name"></a> [name](#input\_name) | The DNS name (FQDN) that this record set will apply to. Can be a subdomain or the zone apex. | `string` | n/a | yes |
+| <a name="input_timeouts"></a> [timeouts](#input\_timeouts) | Timeout settings for cluster operations | <pre>object({<br/>    create = optional(string)<br/>    update = optional(string)<br/>    delete = optional(string)<br/>  })</pre> | `null` | no |
 | <a name="input_ttl"></a> [ttl](#input\_ttl) | The time-to-live (TTL) value for this record set in seconds. Controls how long DNS resolvers cache this record. | `string` | `null` | no |
 | <a name="input_type"></a> [type](#input\_type) | The DNS record type (e.g., A, AAAA, CNAME, MX, TXT, NS). Determines the format and purpose of the record data. | `string` | n/a | yes |
 | <a name="input_zone_id"></a> [zone\_id](#input\_zone\_id) | The ID of the DNS zone where this record set will be created. Takes precedence over zone\_name if both are specified. | `string` | `null` | no |
