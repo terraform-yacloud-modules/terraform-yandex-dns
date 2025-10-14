@@ -37,6 +37,7 @@ No modules.
 | <a name="input_labels"></a> [labels](#input\_labels) | A set of key-value pairs (labels) to apply to the DNS zone. Useful for organizing, filtering, and managing resources. | `map(string)` | `{}` | no |
 | <a name="input_name"></a> [name](#input\_name) | The user-assigned name of the DNS zone. Must be unique within the folder and helps identify the zone in the Yandex Cloud console. | `string` | n/a | yes |
 | <a name="input_private_networks"></a> [private\_networks](#input\_private\_networks) | For private zones, specifies the list of VPC network IDs where the zone will be visible and accessible. Required when is\_public is false. | `list(string)` | `[]` | no |
+| <a name="input_timeouts"></a> [timeouts](#input\_timeouts) | Timeout settings for cluster operations | <pre>object({<br/>    create = optional(string)<br/>    update = optional(string)<br/>    delete = optional(string)<br/>  })</pre> | `null` | no |
 | <a name="input_zone"></a> [zone](#input\_zone) | The DNS name of the zone (e.g., 'example.com.'). Must end with a dot and represents the domain namespace managed by this zone. | `string` | n/a | yes |
 
 ## Outputs
