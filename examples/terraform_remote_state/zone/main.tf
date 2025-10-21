@@ -25,7 +25,8 @@ module "dns_zone" {
     label1 = "label-1-value"
   }
 
-  zone             = "example.com."
-  is_public        = false
-  private_networks = [module.network.vpc_id] # network_id
+  zone                = "example.com."
+  is_public           = false
+  private_networks    = [module.network.vpc_id] # network_id
+  deletion_protection = false
 }

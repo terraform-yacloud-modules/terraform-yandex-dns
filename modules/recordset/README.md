@@ -1,6 +1,6 @@
-# iam-account
+# yandex-dns-recordset
 
-Manage IAM account.
+Manage Yandex Cloud DNS RecordSet.
 
 
 <!-- BEGIN_TF_DOCS -->

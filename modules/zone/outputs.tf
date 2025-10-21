@@ -38,6 +38,11 @@ output "labels" {
   value       = yandex_dns_zone.main.labels
 }
 
+output "deletion_protection" {
+  description = "Indicates whether deletion protection is enabled for the DNS zone"
+  value       = yandex_dns_zone.main.deletion_protection
+}
+
 output "created_at" {
   description = "The timestamp when the DNS zone was created"
   value       = yandex_dns_zone.main.created_at

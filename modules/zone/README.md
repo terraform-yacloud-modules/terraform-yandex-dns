@@ -1,6 +1,6 @@
-# iam-account
+# yandex-dns-zone
 
-Manage IAM account.
+Manage Yandex Cloud DNS Zone.
 
 
 <!-- BEGIN_TF_DOCS -->
@@ -31,6 +31,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_deletion_protection"></a> [deletion\_protection](#input\_deletion\_protection) | Prevents accidental deletion of the DNS zone. When set to true, the zone cannot be deleted without first disabling this protection. | `bool` | `false` | no |
 | <a name="input_description"></a> [description](#input\_description) | An optional description of the DNS zone. Helps document the purpose and usage of the zone. | `string` | `""` | no |
 | <a name="input_folder_id"></a> [folder\_id](#input\_folder\_id) | The ID of the Yandex Cloud folder where the DNS zone will be created. If omitted, the default folder ID from the provider configuration will be used. | `string` | `null` | no |
 | <a name="input_is_public"></a> [is\_public](#input\_is\_public) | Controls the visibility of the DNS zone. Public zones are accessible from the Internet, while private zones are only visible to resources within the specified VPC networks. | `bool` | `false` | no |
@@ -45,6 +46,7 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_created_at"></a> [created\_at](#output\_created\_at) | The timestamp when the DNS zone was created |
+| <a name="output_deletion_protection"></a> [deletion\_protection](#output\_deletion\_protection) | Indicates whether deletion protection is enabled for the DNS zone |
 | <a name="output_description"></a> [description](#output\_description) | Description of the DNS zone |
 | <a name="output_folder_id"></a> [folder\_id](#output\_folder\_id) | Folder ID where the DNS zone is created |
 | <a name="output_id"></a> [id](#output\_id) | ID of a new DNS zone. |

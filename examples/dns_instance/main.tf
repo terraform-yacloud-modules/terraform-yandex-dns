@@ -48,9 +48,10 @@ module "dns_zone" {
   name        = "my-private-zone"
   description = "desc"
 
-  zone             = "apatsev.org.ru."
-  is_public        = true
-  private_networks = [module.network.vpc_id] # можете заменить на ваш network_id
+  zone                = "apatsev.org.ru."
+  is_public           = true
+  private_networks    = [module.network.vpc_id] # можете заменить на ваш network_id
+  deletion_protection = false
 }
 
 module "dns_recordset" {
