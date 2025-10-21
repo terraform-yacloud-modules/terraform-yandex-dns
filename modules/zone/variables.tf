@@ -47,6 +47,12 @@ variable "private_networks" {
   default     = []
 }
 
+variable "deletion_protection" {
+  description = "Prevents accidental deletion of the DNS zone. When set to true, the zone cannot be deleted without first disabling this protection."
+  type        = bool
+  default     = false
+}
+
 variable "timeouts" {
   description = "Timeout settings for cluster operations"
   type = object({

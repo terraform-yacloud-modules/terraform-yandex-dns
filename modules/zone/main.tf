@@ -9,6 +9,8 @@ resource "yandex_dns_zone" "main" {
   public           = var.is_public
   private_networks = var.private_networks
 
+  deletion_protection = var.deletion_protection
+
   dynamic "timeouts" {
     for_each = var.timeouts == null ? [] : [var.timeouts]
     content {
