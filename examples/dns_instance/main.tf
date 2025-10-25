@@ -45,22 +45,40 @@ module "dns_zone" {
   source = "../../modules/zone/"
   # source = "git::https://github.com/terraform-yacloud-modules/terraform-yandex-dns.git//modules/zone?ref=v1.0.0"
 
+  folder_id   = data.yandex_client_config.client.folder_id
   name        = "my-private-zone"
   description = "desc"
+  labels = {
+    environment = "test"
+    project     = "terraform-dns"
+  }
 
   zone                = "apatsev.org.ru."
   is_public           = true
   private_networks    = [module.network.vpc_id] # можете заменить на ваш network_id
   deletion_protection = false
+
+  timeouts = {
+    create = "5m"
+    update = "5m"
+    delete = "5m"
+  }
 }
 
 module "dns_recordset" {
   source = "../../modules/recordset/"
   # source = "git::https://github.com/terraform-yacloud-modules/terraform-yandex-dns.git//modules/recordset?ref=v1.0.0"
 
-  zone_id = module.dns_zone.id
-  name    = "test.apatsev.org.ru."
-  type    = "A"
-  ttl     = 200
-  data    = [module.yandex_compute_instance.instance_public_ip]
+  folder_id = data.yandex_client_config.client.folder_id
+  zone_id   = module.dns_zone.id
+  name      = "test.apatsev.org.ru."
+  type      = "A"
+  ttl       = 200
+  data      = [module.yandex_compute_instance.instance_public_ip]
+
+  timeouts = {
+    create = "2m"
+    update = "2m"
+    delete = "2m"
+  }
 }
