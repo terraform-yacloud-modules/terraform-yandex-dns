@@ -1,3 +1,7 @@
+## v1.38.0 - 2026-02-24
+### Miscellaneous
+- d10172e build(deps): Bump kvendingoldo/git-flow-action from 2.2.0 to 2.16.0 ([#92](https://github.com/terraform-yacloud-modules/terraform-yandex-dns/pull/92))
+
 ## v1.37.0
 ## v1.36.0
 ## v1.35.0
