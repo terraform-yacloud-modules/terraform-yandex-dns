@@ -54,7 +54,7 @@ variable "deletion_protection" {
 }
 
 variable "timeouts" {
-  description = "Timeout settings for cluster operations"
+  description = "Timeout settings for create/update/delete operations on the DNS zone"
   type = object({
     create = optional(string)
     update = optional(string)
