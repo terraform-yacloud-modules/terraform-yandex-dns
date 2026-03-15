@@ -1,3 +1,7 @@
+## v1.40.0 - 2026-03-15
+### Miscellaneous
+- 0f96b9a Update timeouts descriptions, recordset ttl type, zone precondition ([#94](https://github.com/terraform-yacloud-modules/terraform-yandex-dns/pull/94))
+
 ## v1.39.0 - 2026-03-02
 ### Miscellaneous
 - e58d8b1 build(deps): Bump hashicorp/setup-terraform from 3 to 4 ([#93](https://github.com/terraform-yacloud-modules/terraform-yandex-dns/pull/93))
