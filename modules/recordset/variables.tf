@@ -33,7 +33,7 @@ variable "type" {
 
 variable "ttl" {
   description = "The time-to-live (TTL) value for this record set in seconds. Controls how long DNS resolvers cache this record."
-  type        = string
+  type        = number
   default     = null
 }
 
@@ -44,7 +44,7 @@ variable "data" {
 }
 
 variable "timeouts" {
-  description = "Timeout settings for cluster operations"
+  description = "Timeout settings for create/update/delete operations on the DNS record set"
   type = object({
     create = optional(string)
     update = optional(string)

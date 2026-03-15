@@ -28,7 +28,7 @@ module "yandex_compute_instance" {
   hostname         = "instance"
   generate_ssh_key = false
   ssh_user         = "ubuntu"
-  ssh_pubkey       = "~/.ssh/id_rsa.pub"
+  ssh_pubkey       = "~/.ssh/id_ed25519.pub"
 
   user_data = <<-EOF
         #cloud-config
@@ -41,6 +41,7 @@ module "yandex_compute_instance" {
         EOF
 }
 
+# DNS zone: https://yandex.cloud/ru/docs/terraform/resources/dns_zone
 module "dns_zone" {
   source = "../../modules/zone/"
   # source = "git::https://github.com/terraform-yacloud-modules/terraform-yandex-dns.git//modules/zone?ref=v1.0.0"
@@ -55,7 +56,7 @@ module "dns_zone" {
 
   zone                = "apatsev.org.ru."
   is_public           = true
-  private_networks    = [module.network.vpc_id] # можете заменить на ваш network_id
+  private_networks    = [module.network.vpc_id]
   deletion_protection = false
 
   timeouts = {
@@ -65,6 +66,7 @@ module "dns_zone" {
   }
 }
 
+# DNS record set: https://yandex.cloud/ru/docs/terraform/resources/dns_recordset
 module "dns_recordset" {
   source = "../../modules/recordset/"
   # source = "git::https://github.com/terraform-yacloud-modules/terraform-yandex-dns.git//modules/recordset?ref=v1.0.0"
