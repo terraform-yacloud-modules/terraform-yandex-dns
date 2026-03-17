@@ -69,7 +69,7 @@ No modules.
 | <a name="input_create"></a> [create](#input\_create) | Whether to create DNS zone | `bool` | `true` | no |
 | <a name="input_folder_id"></a> [folder\_id](#input\_folder\_id) | Folder-ID where need to add permissions. If omitted default FOLDER\_ID will be used | `string` | `null` | no |
 | <a name="input_labels"></a> [labels](#input\_labels) | A set of labels which will be applied to all resources | `map(string)` | `{}` | no |
-| <a name="input_zones"></a> [zones](#input\_zones) | Map of DNS zone parameters | `any` | `{}` | no |
+| <a name="input_zones"></a> [zones](#input\_zones) | Map of DNS zone parameters | <pre>map(object({<br/>    name                = optional(string)<br/>    description         = optional(string)<br/>    zone                = optional(string)<br/>    folder_id           = optional(string)<br/>    public              = optional(bool, false)<br/>    private_networks    = optional(list(string), [])<br/>    labels              = optional(map(string), {})<br/>    deletion_protection = optional(bool, false)<br/>    timeouts = optional(object({<br/>      create = optional(string)<br/>      update = optional(string)<br/>      delete = optional(string)<br/>    }))<br/>  }))</pre> | `{}` | no |
 
 ## Outputs
 

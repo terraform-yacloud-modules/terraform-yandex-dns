@@ -12,8 +12,22 @@ variable "create" {
 
 variable "zones" {
   description = "Map of DNS zone parameters"
-  type        = any
-  default     = {}
+  type = map(object({
+    name                = optional(string)
+    description         = optional(string)
+    zone                = optional(string)
+    folder_id           = optional(string)
+    public              = optional(bool, false)
+    private_networks    = optional(list(string), [])
+    labels              = optional(map(string), {})
+    deletion_protection = optional(bool, false)
+    timeouts = optional(object({
+      create = optional(string)
+      update = optional(string)
+      delete = optional(string)
+    }))
+  }))
+  default = {}
 }
 
 variable "labels" {

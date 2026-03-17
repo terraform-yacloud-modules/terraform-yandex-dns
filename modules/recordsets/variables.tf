@@ -21,12 +21,29 @@ variable "folder_id" {
 
 variable "records" {
   description = "List of objects of DNS records"
-  type        = any
-  default     = []
+  type = list(object({
+    key            = optional(string)
+    name           = string
+    type           = string
+    ttl            = optional(number, 300)
+    data           = optional(list(string))
+    set_identifier = optional(string)
+  }))
+  default = []
 }
 
 variable "records_jsonencoded" {
   description = "List of map of DNS records (stored as jsonencoded string, for terragrunt)"
   type        = string
   default     = null
+}
+
+variable "timeouts" {
+  description = "Timeout settings for create/update/delete operations on DNS record sets"
+  type = object({
+    create = optional(string)
+    update = optional(string)
+    delete = optional(string)
+  })
+  default = null
 }
