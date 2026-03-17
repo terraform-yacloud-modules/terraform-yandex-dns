@@ -1,3 +1,8 @@
+## v1.41.0 - 2026-03-17
+### Miscellaneous
+- 89a1e34 Merge pull request [#95](https://github.com/terraform-yacloud-modules/terraform-yandex-dns/pull/95) from terraform-yacloud-modules/claude-code
+- ebdfc69 Add CLAUDE.md for Claude Code guidance
+
 ## v1.40.0 - 2026-03-15
 ### Miscellaneous
 - 0f96b9a Update timeouts descriptions, recordset ttl type, zone precondition ([#94](https://github.com/terraform-yacloud-modules/terraform-yandex-dns/pull/94))
