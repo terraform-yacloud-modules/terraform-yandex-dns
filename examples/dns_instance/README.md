@@ -1,7 +1,3 @@
-# DNS recordset example
-
-Terraform module which creates Yandex Cloud DNS resources.
-
 ## Usage
 
 To run this example you need to execute:
@@ -13,4 +9,4 @@ terraform plan
 terraform apply
 ```
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+Note that this example may create resources which can cost money. Run `terraform destroy` when you don't need these resources.

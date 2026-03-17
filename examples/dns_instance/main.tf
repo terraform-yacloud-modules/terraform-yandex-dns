@@ -28,7 +28,7 @@ module "yandex_compute_instance" {
   hostname         = "instance"
   generate_ssh_key = false
   ssh_user         = "ubuntu"
-  ssh_pubkey       = "~/.ssh/id_rsa.pub"
+  ssh_pubkey       = "~/.ssh/id_ed25519.pub"
 
   user_data = <<-EOF
         #cloud-config
@@ -41,24 +41,46 @@ module "yandex_compute_instance" {
         EOF
 }
 
+# DNS zone: https://yandex.cloud/ru/docs/terraform/resources/dns_zone
 module "dns_zone" {
+  source = "../../modules/zone/"
+  # source = "git::https://github.com/terraform-yacloud-modules/terraform-yandex-dns.git//modules/zone?ref=v1.0.0"
 
-  source = "git::https://github.com/terraform-yacloud-modules/terraform-yandex-dns.git//modules/zone?ref=v1.0.0"
-
+  folder_id   = data.yandex_client_config.client.folder_id
   name        = "my-private-zone"
   description = "desc"
+  labels = {
+    environment = "test"
+    project     = "terraform-dns"
+  }
 
-  zone             = "apatsev.org.ru."
-  is_public        = true
-  private_networks = [module.network.vpc_id] # можете заменить на ваш network_id
+  zone                = "apatsev.org.ru."
+  is_public           = true
+  private_networks    = [module.network.vpc_id]
+  deletion_protection = false
+
+  timeouts = {
+    create = "5m"
+    update = "5m"
+    delete = "5m"
+  }
 }
 
+# DNS record set: https://yandex.cloud/ru/docs/terraform/resources/dns_recordset
 module "dns_recordset" {
-  source = "git::https://github.com/terraform-yacloud-modules/terraform-yandex-dns.git//modules/recordset?ref=v1.0.0"
+  source = "../../modules/recordset/"
+  # source = "git::https://github.com/terraform-yacloud-modules/terraform-yandex-dns.git//modules/recordset?ref=v1.0.0"
 
-  zone_id = module.dns_zone.id
-  name    = "test.apatsev.org.ru."
-  type    = "A"
-  ttl     = 200
-  data    = [module.yandex_compute_instance.instance_public_ip]
+  folder_id = data.yandex_client_config.client.folder_id
+  zone_id   = module.dns_zone.id
+  name      = "test.apatsev.org.ru."
+  type      = "A"
+  ttl       = 200
+  data      = [module.yandex_compute_instance.instance_public_ip]
+
+  timeouts = {
+    create = "2m"
+    update = "2m"
+    delete = "2m"
+  }
 }
