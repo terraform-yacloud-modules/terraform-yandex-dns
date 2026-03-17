@@ -7,5 +7,3 @@ output "yandex_dns_zone_name" {
   description = "Name of DNS zone"
   value       = { for k, v in yandex_dns_zone.this : k => v.name }
 }
-
-
