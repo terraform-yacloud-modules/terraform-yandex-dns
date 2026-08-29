@@ -1,3 +1,7 @@
+## v1.42.0 - 2026-08-29
+### Miscellaneous
+- 5c44644 build(deps): Bump actions/cache from 5.0.3 to 5.0.5 ([#97](https://github.com/terraform-yacloud-modules/terraform-yandex-dns/pull/97))
+
 ## v1.41.0 - 2026-03-17
 ### Miscellaneous
 - 89a1e34 Merge pull request [#95](https://github.com/terraform-yacloud-modules/terraform-yandex-dns/pull/95) from terraform-yacloud-modules/claude-code
