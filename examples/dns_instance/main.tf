@@ -1,9 +1,12 @@
 data "yandex_client_config" "client" {}
 
+provider "yandex" {
+}
+
 module "network" {
   source = "git::https://github.com/terraform-yacloud-modules/terraform-yandex-vpc.git?ref=v1.0.0"
 
-  folder_id  = data.yandex_client_config.client.folder_id
+  folder_id  = coalesce(var.folder_id, data.yandex_client_config.client.folder_id)
   blank_name = "instance-minimal-vpc-nat-gateway"
 
   azs = ["ru-central1-a"]
@@ -16,7 +19,7 @@ module "network" {
 module "yandex_compute_instance" {
   source = "git::https://github.com/terraform-yacloud-modules/terraform-yandex-instance.git?ref=v1.0.0"
 
-  folder_id = data.yandex_client_config.client.folder_id
+  folder_id = coalesce(var.folder_id, data.yandex_client_config.client.folder_id)
 
   name = "instance"
 
@@ -46,7 +49,7 @@ module "dns_zone" {
   source = "../../modules/zone/"
   # source = "git::https://github.com/terraform-yacloud-modules/terraform-yandex-dns.git//modules/zone?ref=v1.0.0"
 
-  folder_id   = data.yandex_client_config.client.folder_id
+  folder_id   = coalesce(var.folder_id, data.yandex_client_config.client.folder_id)
   name        = "my-private-zone"
   description = "desc"
   labels = {
@@ -71,7 +74,7 @@ module "dns_recordset" {
   source = "../../modules/recordset/"
   # source = "git::https://github.com/terraform-yacloud-modules/terraform-yandex-dns.git//modules/recordset?ref=v1.0.0"
 
-  folder_id = data.yandex_client_config.client.folder_id
+  folder_id = coalesce(var.folder_id, data.yandex_client_config.client.folder_id)
   zone_id   = module.dns_zone.id
   name      = "test.apatsev.org.ru."
   type      = "A"
