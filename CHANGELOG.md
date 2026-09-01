@@ -1,3 +1,7 @@
+## v1.44.0 - 2026-09-01
+### Miscellaneous
+- eb9532d build(deps): Bump actions/checkout from 6 to 7 ([#99](https://github.com/terraform-yacloud-modules/terraform-yandex-dns/pull/99))
+
 ## v1.43.0 - 2026-09-01
 ### Miscellaneous
 - 89e5170 build(deps): Bump actions/cache from 5.0.5 to 6.1.0 ([#100](https://github.com/terraform-yacloud-modules/terraform-yandex-dns/pull/100))
