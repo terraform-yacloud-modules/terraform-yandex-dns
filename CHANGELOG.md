@@ -1,3 +1,7 @@
+## v1.43.0 - 2026-09-01
+### Miscellaneous
+- 89e5170 build(deps): Bump actions/cache from 5.0.5 to 6.1.0 ([#100](https://github.com/terraform-yacloud-modules/terraform-yandex-dns/pull/100))
+
 ## v1.42.0 - 2026-08-29
 ### Miscellaneous
 - 5c44644 build(deps): Bump actions/cache from 5.0.3 to 5.0.5 ([#97](https://github.com/terraform-yacloud-modules/terraform-yandex-dns/pull/97))
