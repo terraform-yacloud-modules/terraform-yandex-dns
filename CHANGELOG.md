@@ -1,3 +1,7 @@
+## v1.45.0 - 2026-09-01
+### Bug Fixes
+- 5c41602 fix: передача folder_id в примере с приоритетом tfvars над YC_FOLDER_ID ([#98](https://github.com/terraform-yacloud-modules/terraform-yandex-dns/pull/98))
+
 ## v1.44.0 - 2026-09-01
 ### Miscellaneous
 - eb9532d build(deps): Bump actions/checkout from 6 to 7 ([#99](https://github.com/terraform-yacloud-modules/terraform-yandex-dns/pull/99))
