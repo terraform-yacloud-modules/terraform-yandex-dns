@@ -59,6 +59,81 @@ jobs:
           soft_fail: true
           quiet: true
           download_external_modules: false
+  release-gate:
+    name: "Release gate"
+    runs-on: ubuntu-24.04
+    outputs:
+      release: ${{ steps.gate.outputs.release }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Check out code
+        if: github.event_name == 'push'
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Decide whether the push deserves a release
+        id: gate
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          BEFORE_SHA: ${{ github.event.before }}
+          HEAD_SHA: ${{ github.sha }}
+          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+          COMMIT_AUTHOR: ${{ github.event.head_commit.author.username }}
+        run: |
+          set -euo pipefail
+
+          release=true
+
+          if [ "${EVENT_NAME}" != "push" ]; then
+            echo "release=${release}" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # A push that only touches examples/ does not change the module
+          # behaviour, so it does not need a tag or a GitHub release.
+          if [ -z "${BEFORE_SHA}" ] || [[ "${BEFORE_SHA}" =~ ^0+$ ]]; then
+            base="$(git rev-list --max-parents=0 "${HEAD_SHA}")"
+          else
+            base="${BEFORE_SHA}"
+          fi
+          changed="$(git diff --name-only "${base}" "${HEAD_SHA}")"
+          if [ -z "${changed}" ]; then
+            echo "The push contains no file changes - release skipped"
+            release=false
+          else
+            non_examples="$(printf '%s\n' "${changed}" | grep -vc '^examples/' || true)"
+            if [ "${non_examples}" -eq 0 ]; then
+              echo "Only files under examples/ changed - release skipped"
+              release=false
+            fi
+          fi
+
+          # Dependabot bumps are noise for consumers unless the dependency's
+          # major version changes. A squash-merged Dependabot commit carries
+          # "update-type: version-update:semver-<level>" in its body; fall back
+          # to the "from <old> to <new>" title for commits without the body.
+          if [[ "${COMMIT_AUTHOR}" == "dependabot[bot]" || "${COMMIT_MESSAGE,,}" =~ ^build\(deps ]]; then
+            if grep -q 'update-type: version-update:semver-major' <<< "${COMMIT_MESSAGE}"; then
+              echo "Dependabot major update - release allowed"
+            elif grep -q 'update-type: version-update:semver-' <<< "${COMMIT_MESSAGE}"; then
+              echo "Dependabot non-major update - release skipped"
+              release=false
+            elif [[ "${COMMIT_MESSAGE}" =~ from[[:space:]]+v?([0-9]+)(\.[0-9]+)*[[:space:]]+to[[:space:]]+v?([0-9]+) ]]; then
+              from_major="${BASH_REMATCH[1]}"
+              to_major="${BASH_REMATCH[3]}"
+              if [ "${to_major}" -le "${from_major}" ]; then
+                echo "Dependabot update ${from_major}.x -> ${to_major}.x is not major - release skipped"
+                release=false
+              fi
+            else
+              echo "Cannot determine the Dependabot update type - release skipped"
+              release=false
+            fi
+          fi
+
+          echo "release=${release}" >> "$GITHUB_OUTPUT"
   semver:
     name: "Set code version tag"
     runs-on: ubuntu-24.04
@@ -66,6 +141,8 @@ jobs:
       contents: write
     needs:
       - linters
+      - release-gate
+    if: needs.release-gate.outputs.release == 'true'
     defaults:
       run:
         shell: bash
