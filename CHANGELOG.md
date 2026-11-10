@@ -1,3 +1,7 @@
+## v1.46.0 - 2026-11-10
+### Miscellaneous
+- 3ef81e2 ci: не релизить изменения examples и минорные обновления dependabot ([#101](https://github.com/terraform-yacloud-modules/terraform-yandex-dns/pull/101))
+
 ## v1.45.0 - 2026-09-01
 ### Bug Fixes
 - 5c41602 fix: передача folder_id в примере с приоритетом tfvars над YC_FOLDER_ID ([#98](https://github.com/terraform-yacloud-modules/terraform-yandex-dns/pull/98))
